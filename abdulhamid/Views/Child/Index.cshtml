@@ -1,0 +1,46 @@
+﻿@model IEnumerable<abdulhamid.Models.ChildList>
+@{
+    ViewData["Title"] = "Users Page";
+}
+<style>
+    table, th, td {
+        border: 1px solid black;
+    }
+</style>
+<div class="text-center">
+    <h1>Users List</h1>
+    <table>
+        <tr>
+                <th>No</th>
+                <th>Title</th>
+                <th>Body</th>
+                <th>Action</th>
+        </tr>
+        <tbody>
+            @{int i = 0;}
+            @foreach (var child in Model)
+            {
+                <tr>
+                    <td>@Html.Raw(++i)</td>
+                    <td>@child.Title</td>
+                    <td>@child.Body</td>
+                    <td>
+                        <form asp-action="Delete" method="post">
+                            <input type="hidden" name="Id" value="@child.Id"/>
+                            <input type="submit" value="Delete"/>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    <br />
+
+    <form asp-action="Create" asp-controller="Child" method="post">
+        <input type="text" name="title"/>
+        <input type="text" name="body"/>
+        <input type="submit" value="Submit"/>
+
+    </form>
+</div>
